@@ -1,0 +1,4 @@
+.lake/
+logs_*
+*.olean
+drafts/
