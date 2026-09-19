@@ -2,3 +2,7 @@
 logs_*
 *.olean
 drafts/
+
+# Generated certificate chunks (~25 GB, 8 files exceed GitHub's 100 MB limit).
+# Regenerate with tools/gen_cert3.py from the rung data in data/.
+P287/WideExt*.lean
