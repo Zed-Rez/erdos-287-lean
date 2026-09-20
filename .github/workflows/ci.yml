@@ -19,8 +19,12 @@ jobs:
       - name: Get Mathlib cache
         run: lake exe cache get
 
-      - name: Build
-        run: lake build
+      # P287/WideExt*.lean -- the generated certificate chunks, ~25 GB with 8 files
+      # over GitHub's 100 MB limit -- are gitignored, so the Main5..Main23 modules
+      # that import them cannot be built from a fresh checkout. Build exactly what
+      # the axiom audit needs instead: the import closure of Check.lean.
+      - name: Build audited modules
+        run: lake build $(grep '^import P287' Check.lean | sed 's/^import //')
 
       - name: Axiom audit
         run: bash scripts/audit.sh
